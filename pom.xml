@@ -19,6 +19,11 @@
         <version>1.5.3-SNAPSHOT</version>
       </dependency>
       <dependency>
+          <groupId>com.cloudbees</groupId>
+          <artifactId>cloudbees-api-core</artifactId>
+          <version>1.4.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
         <groupId>com.cloudbees.sdk</groupId>
         <artifactId>bees-api</artifactId>
         <version>1.3.5</version>

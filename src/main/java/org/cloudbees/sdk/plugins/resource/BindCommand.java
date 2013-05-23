@@ -58,18 +58,21 @@ public class BindCommand extends AbstractCommand {
 
     @Override
     public int main() throws Exception {
-        TokenRequest tr = new TokenRequest()
-            .withAccountName(getDefaultAccount())
-            .withScope("https://api.cloudbees.com/services/api/subscription/read") // HACK for now
-            .withScope(source,BindingCollection.BIND_CAPABILITY)
-            .withScope(sink,CloudResource.READ_CAPABILITY)
-            .withGenerateRequestToken(false);
-        OauthToken t = createClient().createToken(tr);
+//        TokenRequest tr = new TokenRequest()
+//            .withAccountName(getDefaultAccount())
+//            .withScope("https://api.cloudbees.com/services/api/subscription/read") // HACK for now
+//            .withScope(source,BindingCollection.BIND_CAPABILITY)
+//            .withScope(sink,CloudResource.READ_CAPABILITY)
+//            .withGenerateRequestToken(false);
+//        OauthToken t = createClient().createToken(tr);
 
-        CloudResource source = CloudResource.fromOAuthToken(this.source, t.accessToken);
-        CloudResource sink   = CloudResource.fromOAuthToken(this.sink,   t.accessToken);
 
-        source.as(BindableSource.class).getBindingCollection().bind(sink, label, settings);
+        String oat = "bogus"; // t.accessToken;
+        CloudResource source = CloudResource.fromOAuthToken(this.source, oat);
+        CloudResource sink   = CloudResource.fromOAuthToken(this.sink,   oat);
+
+        CloudResource e = source.as(BindableSource.class).getBindingCollection().bind(sink, label, settings);
+        System.out.println("Created binding: "+e.getUrl());
 
         return 0;
     }
