@@ -2,6 +2,7 @@ package org.cloudbees.sdk.plugins.resource;
 
 import com.cloudbees.api.BeesClient;
 import com.cloudbees.api.cr.BindableSource;
+import com.cloudbees.api.cr.BindingCollection;
 import com.cloudbees.api.cr.CloudResource;
 import com.cloudbees.api.oauth.OauthClient;
 import com.cloudbees.api.oauth.OauthToken;
@@ -20,6 +21,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Bind two cloud resources.
+ *
+ * Still very much a work in progress and experimental.
+ *
+ * Another purpose of this code is to exercise the {@link CloudResource} client library to
+ * make sure its usability.
+ *
  * @author Kohsuke Kawaguchi
  */
 @BeesCommand(group="Resource (New)",description="Bind one CR to another")
@@ -50,16 +58,14 @@ public class BindCommand extends AbstractCommand {
 
     @Override
     public int main() throws Exception {
-        TokenRequest tr = new TokenRequest(null,null,null,getDefaultAccount(),
-                "https://api.cloudbees.com/services/api/subscription/read", // HACK for now
-                scope(source,"bind"),
-                scope(sink,"read")
-                );
+        TokenRequest tr = new TokenRequest()
+            .withAccountName(getDefaultAccount())
+            .withScope("https://api.cloudbees.com/services/api/subscription/read") // HACK for now
+            .withScope(source,BindingCollection.BIND_CAPABILITY)
+            .withScope(sink,CloudResource.READ_CAPABILITY)
+            .withGenerateRequestToken(false);
         OauthToken t = createClient().createToken(tr);
 
-        // TODO: I don't want a refresh token. I don't want a long record of a token
-
-        // TODO: this shall move to the cloudbees-api-client
         CloudResource source = CloudResource.fromOAuthToken(this.source, t.accessToken);
         CloudResource sink   = CloudResource.fromOAuthToken(this.sink,   t.accessToken);
 
