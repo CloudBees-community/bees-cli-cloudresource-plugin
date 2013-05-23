@@ -5,45 +5,21 @@ import com.cloudbees.api.cr.BindableSource;
 import com.cloudbees.api.cr.CloudResource;
 import com.cloudbees.api.oauth.OauthClient;
 import com.cloudbees.sdk.cli.AbstractCommand;
-import com.cloudbees.sdk.cli.BeesClientFactory;
 import com.cloudbees.sdk.cli.BeesCommand;
 import com.cloudbees.sdk.cli.CLICommand;
 import org.kohsuke.args4j.Argument;
-import org.kohsuke.args4j.Option;
 
-import javax.inject.Inject;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
- * Bind two cloud resources.
- *
- * Still very much a work in progress and experimental.
- *
- * Another purpose of this code is to exercise the {@link CloudResource} client library to
- * make sure its usability.
- *
  * @author Kohsuke Kawaguchi
  */
-@BeesCommand(group="Resource (New)",description="Bind one CR to another")
-@CLICommand("resource2:bind")
-public class BindCommand extends AbstractCommand {
+@BeesCommand(group="Resource (New)",description="List up all the coud resources from CRP")
+@CLICommand("resource2:list")
+public class ListCommand extends AbstractCommand {
     @Argument(index=0,metaVar="SOURCE_URL",usage="URL of the source cloud resource to bind from",required=true)
     URL source;
-
-    @Argument(index=1,metaVar="SINK_URL",usage="URL of the sink cloud resource to bind to",required=true)
-    URL sink;
-
-    @Option(name="-label",usage="Label decorates the binding by describing the kind of binding so that the source can distinguish different kinds of bindings to sinks of similar types")
-    String label;
-
-    @Option(name="-S")
-    Map<String,String> settings = new HashMap<String, String>();
-
-    @Inject
-    protected BeesClientFactory factory;
 
     protected String getDefaultAccount() {
         return factory.getConfigProperties().getProperty("bees.project.app.domain");
