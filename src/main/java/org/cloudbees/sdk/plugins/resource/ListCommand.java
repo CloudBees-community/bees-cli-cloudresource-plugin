@@ -2,6 +2,8 @@ package org.cloudbees.sdk.plugins.resource;
 
 import com.cloudbees.api.cr.CloudResource;
 import com.cloudbees.api.cr.CloudResourceProvider;
+import com.cloudbees.api.oauth.OauthToken;
+import com.cloudbees.api.oauth.TokenRequest;
 import com.cloudbees.sdk.cli.BeesCommand;
 import com.cloudbees.sdk.cli.CLICommand;
 import org.kohsuke.args4j.Argument;
@@ -19,9 +21,13 @@ public class ListCommand extends AbstractResourceCommand {
 
     @Override
     public int main() throws Exception {
-        // TODO: properly authenticate the request
+        TokenRequest tr = new TokenRequest()
+            .withAccountName(getDefaultAccount())
+            .withScope(source, CloudResource.READ_CAPABILITY)
+            .withGenerateRequestToken(false);
+        OauthToken t = createClient().createToken(tr);
 
-        CloudResource source = CloudResource.fromOAuthToken(this.source, "");
+        CloudResource source = CloudResource.fromOAuthToken(this.source, t);
 
         for (CloudResource res : source.as(CloudResourceProvider.class)) {
             System.out.println(res);
