@@ -44,6 +44,7 @@ public class BindCommand extends AbstractResourceCommand {
         TokenRequest tr = new TokenRequest()
             .withAccountName(getDefaultAccount())
             .withScope("https://api.cloudbees.com/services/api/subscription/read") // HACK for now
+            .withScope(source, CloudResource.READ_CAPABILITY)
             .withScope(source, BindingCollection.BIND_CAPABILITY)
             .withScope(sink,CloudResource.READ_CAPABILITY)
             .withGenerateRequestToken(false);
