@@ -29,7 +29,7 @@ import java.util.Map;
  */
 @BeesCommand(group="Resource (New)",description="Bind one CR to another")
 @CLICommand("resource2:bind")
-public class BindCommand extends AbstractCommand {
+public class BindCommand extends AbstractResourceCommand {
     @Argument(index=0,metaVar="SOURCE_URL",usage="URL of the source cloud resource to bind from",required=true)
     URL source;
 
@@ -41,17 +41,6 @@ public class BindCommand extends AbstractCommand {
 
     @Option(name="-S")
     Map<String,String> settings = new HashMap<String, String>();
-
-    @Inject
-    protected BeesClientFactory factory;
-
-    protected String getDefaultAccount() {
-        return factory.getConfigProperties().getProperty("bees.project.app.domain");
-    }
-
-    protected OauthClient createClient() throws IOException {
-        return factory.get(BeesClient.class).getOauthClient();
-    }
 
     @Override
     public int main() throws Exception {
