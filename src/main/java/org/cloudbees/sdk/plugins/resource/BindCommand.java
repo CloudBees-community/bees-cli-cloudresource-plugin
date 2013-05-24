@@ -53,7 +53,7 @@ public class BindCommand extends AbstractResourceCommand {
         CloudResource source = CloudResource.fromOAuthToken(this.source, t);
         CloudResource sink   = CloudResource.fromOAuthToken(this.sink,   t);
 
-        CloudResource e = source.as(BindableSource.class).getBindingCollection().bind(sink, label, settings);
+        CloudResource e = source.coerce(BindableSource.class).getBindingCollection().bind(sink, label, settings);
         System.out.println("Created binding: "+e.getUrl());
 
         return 0;
