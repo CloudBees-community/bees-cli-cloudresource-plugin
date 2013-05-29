@@ -42,7 +42,7 @@ public class BindCommand extends AbstractResourceCommand {
     @Override
     public int main() throws Exception {
         TokenRequest tr = new TokenRequest()
-            .withAccountName(getDefaultAccount())
+            .withAccountName(getAccount())
             .withScope("https://api.cloudbees.com/services/api/subscription/read") // HACK for now
             .withScope(source, CloudResource.READ_CAPABILITY)
             .withScope(source, BindingCollection.BIND_CAPABILITY)

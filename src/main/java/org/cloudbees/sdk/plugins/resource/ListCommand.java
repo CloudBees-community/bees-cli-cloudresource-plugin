@@ -22,7 +22,7 @@ public class ListCommand extends AbstractResourceCommand {
     @Override
     public int main() throws Exception {
         TokenRequest tr = new TokenRequest()
-            .withAccountName(getDefaultAccount())
+            .withAccountName(getAccount())
             .withScope(source, CloudResource.READ_CAPABILITY)
             .withGenerateRequestToken(false);
         OauthToken t = createClient().createToken(tr);
