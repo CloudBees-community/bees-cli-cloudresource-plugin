@@ -13,10 +13,10 @@ import java.net.URL;
 /**
  * @author Kohsuke Kawaguchi
  */
-@BeesCommand(group="Resource (New)",description="List up all the coud resources from CRP")
+@BeesCommand(group="Resource (New)",description="List up all the cloud resources from CRP")
 @CLICommand("resource2:list")
 public class ListCommand extends AbstractResourceCommand {
-    @Argument(index=0,metaVar="SOURCE_URL",usage="URL of the source cloud resource to bind from",required=true)
+    @Argument(index=0,metaVar="SOURCE_URL",usage="URL of a cloud resource provider",required=true)
     URL source;
 
     @Override
