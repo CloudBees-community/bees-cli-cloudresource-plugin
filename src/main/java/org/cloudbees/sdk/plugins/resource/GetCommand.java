@@ -14,8 +14,8 @@ import java.net.URL;
 /**
  * @author Kohsuke Kawaguchi
  */
-@BeesCommand(group="Resource (New)",description="Obtain the current state of a resource")
-@CLICommand("resource2:get")
+@BeesCommand(group="Cloud Resource",description="Obtain the current state of a resource")
+@CLICommand("cloud:resource:get")
 public class GetCommand extends AbstractResourceCommand {
     @Argument(index=0,metaVar="SOURCE_URL",usage="URL of the resource to retrieve",required=true)
     URL source;
