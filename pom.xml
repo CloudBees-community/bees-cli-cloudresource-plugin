@@ -9,7 +9,7 @@
 
     <groupId>org.cloudbees.sdk.plugins</groupId>
     <artifactId>resource-plugin</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
     <name>CloudResource Binding plugin</name>
 
     <dependencies>
