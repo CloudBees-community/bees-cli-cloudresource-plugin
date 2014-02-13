@@ -16,7 +16,7 @@ import java.net.URL;
  * @author Kohsuke Kawaguchi
  */
 @BeesCommand(group="Cloud Resource",description="Register a new CRP")
-@CLICommand("cloud:resource:register")
+@CLICommand("cr:register")
 public class RegisterCRPCommand extends AbstractResourceCommand {
     @Argument(index=0,metaVar="CRP_URL",usage="URL of the CRP to register",required=true)
     URL crp;

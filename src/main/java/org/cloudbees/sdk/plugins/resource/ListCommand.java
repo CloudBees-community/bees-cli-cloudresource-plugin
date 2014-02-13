@@ -14,7 +14,7 @@ import java.net.URL;
  * @author Kohsuke Kawaguchi
  */
 @BeesCommand(group="Cloud Resource",description="List up all the cloud resources from CRP")
-@CLICommand("cloud:resource:list")
+@CLICommand("cr:list")
 public class ListCommand extends AbstractResourceCommand {
     @Argument(index=0,metaVar="SOURCE_URL",usage="URL of a cloud resource provider",required=true)
     URL source;

@@ -14,7 +14,7 @@ import java.net.URL;
  * @author Vivek Pandey
  */
 @BeesCommand(group="Cloud Resource",description="Delete CRP from registry")
-@CLICommand("cloud:resource:delete")
+@CLICommand("cr:delete")
 public class DeleteCrpCommand extends AbstractResourceCommand {
     @Argument(index=0,metaVar="CRP_URL",usage="URL of the CRP registry to delete",required=true)
     URL registry;

@@ -25,7 +25,7 @@ import java.util.Map;
  * @author Kohsuke Kawaguchi
  */
 @BeesCommand(group="Cloud Resource",description="Bind one CR to another")
-@CLICommand("cloud:resource:bind")
+@CLICommand("cr:bind")
 public class BindCommand extends AbstractResourceCommand {
     @Argument(index=0,metaVar="SOURCE_URL",usage="URL of the source cloud resource to bind from",required=true)
     URL source;
